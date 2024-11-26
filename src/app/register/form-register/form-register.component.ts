@@ -132,11 +132,57 @@ export class FormRegisterComponent {
   }
 
   // Función principal de registro, dependiendo de la elección
-  signUp(): void {
-    if (this.flag) {
-      this.registerDonee(); // Registrar como Donatario
-    } else {
-      this.registerDonor(); // Registrar como Donante
+  signUp() {
+    if (!this.userData.first_name || !this.userData.last_name || !this.userData.phone_number || !this.userData.email || !this.userData.password) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Todos los campos son obligatorios.',
+        icon: 'error',
+      });
+      return; 
+    }
+  
+    if (!/^[a-zA-Z\s]+$/.test(this.userData.first_name) || !/^[a-zA-Z\s]+$/.test(this.userData.last_name)) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'El nombre y apellido solo pueden contener letras y espacios.',
+        icon: 'error',
+      });
+      return; 
+    }
+  
+    if (this.userData.password.length <= 8) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'La contraseña debe tener más de 8 caracteres.',
+        icon: 'error',
+      });
+      return; 
+    }
+  
+    if (!/^\d{10}$/.test(this.userData.phone_number)) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'El número de teléfono debe tener exactamente 10 dígitos.',
+        icon: 'error',
+      });
+      return; 
+    }
+  
+    const emailPattern =
+      /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com|gmail\.es|hotmail\.es|outlook\.es)$/;
+    if (!emailPattern.test(this.userData.email)) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Ingresa un correo electrónico válido.',
+        icon: 'error',
+      });
+      return; 
+    }
+      if (this.flag) {
+      this.registerDonee();
+      } else {
+      this.registerDonor();
     }
   }
 }

@@ -14,7 +14,8 @@
       >
         {{ flag ? "Registrar como donador" : "Registrar como donatario" }}
       </button>
-    </div> <br>
+    </div>
+    <br />
 
     <!-- Formulario de registro -->
     <form (ngSubmit)="signUp()">
@@ -27,9 +28,10 @@
             placeholder="Ingresa tu nombre"
             [(ngModel)]="userData.first_name"
             required
+            pattern="[A-Za-z]+"
+            title="El nombre solo puede contener letras"
           />
         </div>
-
         <div class="input">
           <label for="last_name">Apellido</label>
           <input
@@ -38,6 +40,8 @@
             placeholder="Ingresa tu apellido"
             [(ngModel)]="userData.last_name"
             required
+            pattern="[A-Za-z]+"
+            title="El apellido solo puede contener letras"
           />
         </div>
       </div>
@@ -45,10 +49,13 @@
       <div class="input">
         <label for="phone_number">Número de Teléfono</label> <br />
         <input
+          maxlength="10"
           type="text"
           name="phone_number"
           placeholder="Ingresa tu número de teléfono"
           [(ngModel)]="userData.phone_number"
+          pattern="\d{10}"
+          title="El número debe tener exactamente 10 dígitos numéricos."
           required
         />
         <br />
@@ -67,7 +74,6 @@
           <option value="O-">O-</option>
         </select>
       </div>
-
       <div class="input">
         <label for="email">Correo</label> <br />
         <input
@@ -75,6 +81,8 @@
           name="email"
           placeholder="Ingresa tu correo"
           [(ngModel)]="userData.email"
+          pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com|gmail\.es|hotmail\.es|outlook\.es)"
+          title="Ingresa un correo valido"
           required
         />
         <br />
@@ -88,6 +96,8 @@
           placeholder="Ingresa tu contraseña"
           [(ngModel)]="userData.password"
           required
+          minlength="9"
+          title="La contraseña debe tener al menos 9 caracteres"
         />
         <br />
       </div>

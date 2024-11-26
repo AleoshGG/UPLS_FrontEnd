@@ -225,6 +225,7 @@ export class ListPublicationsComponent implements OnInit {
             publication.commentContent = '';
           },
           error: (error: any) => {
+            console.log(error);
             Swal.fire({
               icon: 'error',
               title: 'Error',
